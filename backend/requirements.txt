@@ -1,0 +1,16 @@
+fastapi>=0.95.0
+uvicorn>=0.22.0
+pydantic>=1.10.7
+networkx>=3.1
+watchdog==3.0.0
+python-multipart==0.0.6
+aiofiles==23.1.0
+sqlalchemy>=2.0.30
+matplotlib==3.7.1
+plotly==5.14.1
+pytest==7.3.1
+httpx==0.24.0
+joblib==1.2.0
+tqdm==4.65.0
+torch>=2.0.0
+torch_geometric>=2.3.0 

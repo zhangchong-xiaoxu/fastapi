@@ -1,0 +1,25 @@
+{
+  "networks": [
+    { 
+      "id": "sample", 
+      "name": "示例网络", 
+      "nodeCount": 15, 
+      "edgeCount": 20,
+      "description": "一个简单的示例社交网络，包含5个社区"
+    },
+    { 
+      "id": "community", 
+      "name": "社区网络", 
+      "nodeCount": 197, 
+      "edgeCount": 2756,
+      "description": "具有明显社区结构的大型社交网络"
+    },
+    { 
+      "id": "random", 
+      "name": "随机网络", 
+      "nodeCount": 100, 
+      "edgeCount": 492,
+      "description": "随机生成的网络结构，用于比较分析"
+    }
+  ]
+} 

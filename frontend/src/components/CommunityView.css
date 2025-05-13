@@ -1,0 +1,143 @@
+.community-view {
+  background-color: white;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+
+.community-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #eee;
+}
+
+.community-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.community-stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #4a6ee0;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #777;
+  margin-top: 0.25rem;
+}
+
+.community-table-container {
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.community-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.community-table th,
+.community-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.community-table th {
+  background-color: #f5f7fa;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.community-table th:hover {
+  background-color: #edf2f7;
+}
+
+.community-table tr:hover {
+  background-color: #f9fafc;
+}
+
+.community-table tr.selected {
+  background-color: #ebf5ff;
+}
+
+.sort-arrow {
+  margin-left: 5px;
+  display: inline-block;
+}
+
+.sorted-asc,
+.sorted-desc {
+  background-color: #edf2f7;
+}
+
+.community-detail {
+  background-color: #f5f7fa;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.community-detail h4 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.key-nodes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.key-node-item {
+  background-color: #e9ecef;
+  color: #495057;
+  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .community-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .community-stats {
+    margin-top: 0.5rem;
+  }
+  
+  .community-table th,
+  .community-table td {
+    padding: 0.5rem;
+  }
+}

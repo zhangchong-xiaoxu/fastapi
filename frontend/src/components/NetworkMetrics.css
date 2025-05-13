@@ -1,0 +1,185 @@
+.network-metrics-panel {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.network-metrics-panel h3 {
+  margin-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  font-size: 1.1em;
+}
+
+.network-metrics-panel h4 {
+  margin: 15px 0 10px 0;
+  font-size: 0.95em;
+  color: #555;
+}
+
+.network-metrics-panel h5 {
+  margin: 10px 0;
+  font-size: 0.85em;
+  color: #666;
+}
+
+.metrics-tabs {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 15px;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 8px 15px;
+  margin-right: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.tab-button:hover {
+  color: #333;
+}
+
+.tab-button.active {
+  color: #4a6ee0;
+  border-bottom-color: #4a6ee0;
+  font-weight: 500;
+}
+
+.metrics-content {
+  min-height: 200px;
+}
+
+/* Advanced Metrics Styles */
+.metric-group {
+  margin-bottom: 20px;
+}
+
+.metric-group p {
+  margin: 5px 0;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.distribution-chart {
+  margin-top: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #fafafa;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  height: 150px;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.bar-chart.horizontal {
+  display: block;
+  height: auto;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.bar-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.bar-row .bar-label {
+  width: 30px;
+  text-align: right;
+  margin-right: 10px;
+  font-size: 12px;
+  color: #666;
+}
+
+.bar-row .bar-container {
+  flex-direction: row;
+  height: 16px;
+}
+
+.bar {
+  background-color: #4a6ee0;
+  width: 100%;
+  min-height: 4px;
+  border-radius: 2px;
+  transition: height 0.3s;
+}
+
+.bar-row .bar {
+  height: 100%;
+  border-radius: 2px;
+}
+
+.bar-label {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #666;
+}
+
+.bar-value {
+  margin-left: 8px;
+  font-size: 12px;
+  color: #666;
+}
+
+/* Centrality Metrics Styles */
+.centrality-list {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.centrality-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9em;
+}
+
+.centrality-item:last-child {
+  border-bottom: none;
+}
+
+.centrality-item:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.centrality-item .rank {
+  width: 30px;
+  font-weight: 600;
+  color: #666;
+}
+
+.centrality-item .node-name {
+  flex: 1;
+  padding-right: 10px;
+}
+
+.centrality-item .node-value {
+  font-family: monospace;
+  color: #4a6ee0;
+} 

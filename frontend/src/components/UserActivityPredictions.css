@@ -1,0 +1,141 @@
+.user-activity-predictions {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.user-activity-predictions .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.user-activity-predictions h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.search-container {
+  position: relative;
+  width: 250px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.user-activity-predictions table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-activity-predictions th {
+  background-color: #f9f9f9;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #555;
+  border-bottom: 2px solid #eaeaea;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  user-select: none;
+}
+
+.user-activity-predictions th:hover {
+  background-color: #f0f0f0;
+}
+
+.user-activity-predictions td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #eaeaea;
+  color: #333;
+}
+
+.user-activity-predictions tbody tr {
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.user-activity-predictions tbody tr:hover {
+  background-color: #f5f8ff;
+}
+
+.sort-arrow {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.positive-change {
+  color: #28a745;
+  font-weight: 500;
+}
+
+.negative-change {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+.neutral-change {
+  color: #6c757d;
+}
+
+.selected-row {
+  background-color: #e6f3ff !important;
+  border-left: 3px solid #4a90e2;
+}
+
+.no-results {
+  text-align: center;
+  color: #6c757d;
+  padding: 2rem !important;
+}
+
+.prediction-info {
+  padding: 1rem 1.5rem;
+  background-color: #f8f9fa;
+  border-top: 1px solid #eaeaea;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.prediction-info strong {
+  color: #495057;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .user-activity-predictions .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .search-container {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .user-activity-predictions th, 
+  .user-activity-predictions td {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.9rem;
+  }
+} 

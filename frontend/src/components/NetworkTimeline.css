@@ -1,0 +1,101 @@
+.network-timeline {
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.timeline-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.timeline-point {
+  fill: #4a6ee0;
+  stroke: white;
+  stroke-width: 2px;
+  cursor: pointer;
+  transition: r 0.2s;
+}
+
+.timeline-point:hover {
+  r: 8;
+}
+
+.timeline-point.selected {
+  fill: #e74c3c;
+  r: 8;
+  stroke-width: 2px;
+}
+
+.vertical-line {
+  stroke: #ddd;
+  stroke-width: 1px;
+  opacity: 0.3;
+}
+
+.line {
+  fill: none;
+  stroke-width: 2px;
+}
+
+.nodes-line {
+  stroke: #4a6ee0;
+}
+
+.point-label {
+  font-size: 10px;
+  font-weight: 600;
+  fill: #333;
+}
+
+.timeline-legend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.legend-color {
+  width: 14px;
+  height: 4px;
+  margin-right: 6px;
+  border-radius: 2px;
+}
+
+.nodes-color {
+  background-color: #4a6ee0;
+}
+
+.legend-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.selected-info {
+  font-size: 12px;
+  color: #555;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .timeline-legend {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .selected-info {
+    margin-top: 10px;
+  }
+} 

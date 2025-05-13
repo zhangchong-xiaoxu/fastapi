@@ -1,0 +1,308 @@
+
+# 社交网络分析系统功能详解
+
+## 1. 系统概述
+
+社交网络分析系统是一个全栈Web应用，用于可视化、分析和比较社交网络数据。该系统由React前端和Python FastAPI后端组成，支持多种网络数据格式的导入、处理和分析，并通过直观的界面展示网络结构和特性。
+
+## 2. 系统架构
+
+### 2.1 前端架构
+
+- **技术栈**：React、TypeScript、D3.js
+- **主要组件**：
+  - 页面组件：Dashboard、NetworkView、Analysis、NetworkComparison
+  - 通用组件：NetworkControls、NetworkFilters、NetworkSearch、NodeDetail
+  - 数据可视化组件：基于D3.js的网络图渲染
+
+### 2.2 后端架构
+
+- **技术栈**：Python、FastAPI、SQLAlchemy、NetworkX
+- **主要模块**：
+  - API路由：network、analysis、user、activities
+  - 数据处理：NetworkDataProcessor
+  - 网络分析：NetworkAnalyzer
+  - 数据模型：基于SQLAlchemy的ORM模型
+
+### 2.3 数据流程
+
+1. 用户上传网络数据（CSV、JSON、GraphML格式，模拟数据都在data/input文件夹里面）
+2. 后端处理并存储网络数据到数据库
+3. 计算网络指标和特性
+4. 前端从API获取数据并进行可视化和交互
+
+## 3. 核心功能详解
+
+### 3.1 仪表盘 (Dashboard)
+
+仪表盘提供系统总览，展示关键网络指标和最近活动。
+
+#### 主要功能：
+
+- **网络概览**：显示当前网络的节点数、边数、密度和社区数量
+- **关键指标**：展示模块化、平均路径长度、最大社区和传递性等关键指标
+- **最近活动**：记录用户在系统中的最近操作
+- **数据来源**：从API获取网络快照数据，展示最新的网络分析结果
+
+#### 技术实现：
+
+```typescript
+// 获取网络快照数据
+const snapshotsResponse = await axios.get('/api/network/snapshots');
+// 获取详细指标
+const metricsResponse = await analysisApi.getClusteringCoefficient(latestSnapshot.id);
+const communitiesResponse = await analysisApi.getCommunities(latestSnapshot.id, 'louvain');
+```
+
+### 3.2 网络视图 (Network View)
+
+网络视图功能提供交互式网络图形可视化，用于探索网络结构和关系。
+
+#### 主要功能：
+
+- **交互式可视化**：基于D3.js的力导向布局、径向布局和圆形布局
+- **网络控制**：调整节点大小、连接强度、标签显示和社区突出显示
+- **节点搜索**：基于名称或ID查找特定节点
+- **网络过滤**：根据节点社区、边权重和节点度数过滤显示
+- **链接预测**：预测网络中可能存在的新连接关系
+- **节点详情**：查看单个节点的详细属性和连接关系
+
+#### 技术实现：
+
+```typescript
+// 创建力导向布局
+sim = d3.forceSimulation<any, any>()
+  .force("link", d3.forceLink().id((d: any) => d.id).distance(controlsState.linkStrength * 200))
+  .force("charge", d3.forceManyBody().strength(-300))
+  .force("center", d3.forceCenter(width / 2, height / 2));
+
+// 链接预测API调用
+const response = await networkApi.predictLinks(networkId);
+```
+
+### 3.3 网络分析 (Analysis)
+
+网络分析功能提供对网络结构和特性的深入分析，揭示社区结构和节点影响力。
+
+#### 主要功能：
+
+- **社区检测**：识别和显示网络中的社区结构
+- **中心性分析**：计算节点的不同中心性指标（介数中心性、接近中心性、度中心性）
+- **用户活动预测**：基于网络结构预测用户未来活动
+- **影响力网络**：可视化节点影响力传播和关键节点
+
+#### 技术实现：
+
+```typescript
+// 获取社区数据
+const communitiesResponse = await axios.get('/api/network/communities');
+// 获取中心性数据
+const centralityResponse = await analysisApi.getCentrality(networkId, 'all');
+```
+
+### 3.4 网络比较 (Network Comparison)
+
+网络比较功能允许比较不同时期或不同类型的网络，识别结构变化和演化模式。
+
+#### 主要功能：
+
+- **快照选择**：从历史网络快照中选择两个进行比较
+- **增长分析**：计算节点和边的增长情况
+- **结构变化**：识别共同节点、新增节点、删除节点及相应的边变化
+- **社区演化**：分析社区结构的变化和增长情况
+- **视觉比较**：直观展示两个网络的差异
+
+#### 技术实现：
+
+```typescript
+// 比较两个网络
+const response = await axios.post('/api/network/compare', { 
+  snapshotIds: selectedSnapshots 
+});
+
+// 计算结构变化
+const structuralChanges = {
+  commonNodes: common_nodes.size,
+  newNodes: new_nodes.size,
+  removedNodes: removed_nodes.size,
+  commonEdges: common_edges.size,
+  newEdges: new_edges.size,
+  removedEdges: removed_edges.size
+};
+```
+
+## 4. 数据模型
+
+### 4.1 网络数据模型
+
+```python
+class NetworkData(Base):
+    """Model for storing network metadata."""
+    __tablename__ = "network_data"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    description = Column(String, nullable=True)
+    file_path = Column(String)
+    node_count = Column(Integer)
+    edge_count = Column(Integer)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
+```
+
+### 4.2 网络比较数据模型
+
+```python
+class NetworkComparison(Base):
+    """Model for storing network comparison history."""
+    __tablename__ = "network_comparisons"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    snapshot1_id = Column(String, index=True)
+    snapshot2_id = Column(String, index=True)
+    comparison_result = Column(JSON)
+    node_growth = Column(Integer)
+    edge_growth = Column(Integer)
+    new_communities = Column(Integer)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+```
+
+## 5. 核心算法
+
+### 5.1 社区检测算法
+
+- **Louvain算法**：基于模块度优化的多层次社区检测算法
+- **标签传播算法**：通过节点标签传播识别社区结构
+- **层次聚类**：基于相似度计算的层次社区识别
+
+### 5.2 中心性计算
+
+- **度中心性**：节点的连接数量
+- **介数中心性**：节点位于网络最短路径上的频率
+- **接近中心性**：节点到其他所有节点的平均距离倒数
+- **特征向量中心性**：基于相邻节点重要性的递归计算
+
+### 5.3 链接预测算法
+
+- **公共邻居**：基于两个节点共享邻居数量的预测
+- **Jaccard系数**：考虑共同邻居与总邻居比例的预测
+- **Adamic/Adar指数**：考虑共同邻居的度数的预测
+- **优先连接**：基于节点度数的预测
+
+## 6. API接口设计
+
+### 6.1 网络数据接口
+
+```python
+@router.get("/")
+async def get_network_data(db: Session = Depends(get_db))
+
+@router.post("/upload")
+async def upload_network_data(file: UploadFile = File(...), ...)
+
+@router.get("/snapshots")
+async def get_network_snapshots(db: Session = Depends(get_db))
+
+@router.get("/snapshot/{snapshot_id}")
+async def get_network_snapshot(snapshot_id: str, db: Session = Depends(get_db))
+```
+
+### 6.2 网络分析接口
+
+```python
+@router.post("/centrality")
+async def calculate_centrality(request: CentralityRequest)
+
+@router.post("/community_detection")
+async def detect_communities(request: CommunityDetectionRequest)
+
+@router.get("/clustering")
+async def calculate_clustering_coefficient(network_id: str)
+```
+
+### 6.3 网络比较接口
+
+```python
+@router.post("/compare")
+async def compare_networks(request: ComparisonRequest, db: Session = Depends(get_db))
+
+@router.get("/comparisons/history")
+async def get_comparison_history(limit: int = 10, db: Session = Depends(get_db))
+```
+
+## 7. 可视化技术
+
+### 7.1 力导向布局
+
+使用D3.js的力导向模拟，通过物理模型计算节点位置，使得相连的节点靠近，未连接的节点远离。
+
+```typescript
+d3.forceSimulation()
+  .force("link", d3.forceLink().id(d => d.id))
+  .force("charge", d3.forceManyBody())
+  .force("center", d3.forceCenter(width / 2, height / 2));
+```
+
+### 7.2 径向布局
+
+将节点分布在圆周上，适合强调网络中心与外围结构。
+
+```typescript
+.force("r", d3.forceRadial(radius, width / 2, height / 2).strength(0.8))
+```
+
+### 7.3 交互式功能
+
+- **缩放与平移**：使用d3.zoom实现图形缩放和平移
+- **拖拽**：节点可拖拽调整位置
+- **筛选**：根据属性筛选显示的节点和边
+- **搜索**：快速定位特定节点
+
+## 8. 数据库设计
+
+系统使用SQLite数据库存储网络元数据和分析结果，网络数据本身以处理后的JSON文件保存。
+
+### 主要表：
+
+- **network_data**：存储网络元数据
+- **analysis_history**：记录分析历史
+- **network_comparisons**：存储网络比较结果
+
+## 9. 未来扩展方向
+
+- **时序网络分析**：分析网络随时间变化的演化模式
+- **高级预测模型**：集成机器学习模型预测链接和社区发展
+- **多层网络支持**：分析和可视化多层网络结构
+- **大规模网络优化**：提高大型网络的处理和可视化性能
+- **API扩展**：支持更多网络分析算法和指标计算
+
+## 10. 技术挑战与解决方案
+
+### 10.1 大型网络可视化
+
+**挑战**：大型网络中节点和边数量众多，直接渲染会导致性能问题
+**解决方案**：
+- 实现节点聚类和边过滤
+- 采用WebGL渲染提高性能
+- 多层次细节展示
+
+### 10.2 复杂指标计算
+
+**挑战**：部分网络指标计算复杂度高，耗时长
+**解决方案**：
+- 异步计算和缓存结果
+- 算法优化和并行计算
+- 增量计算
+
+### 10.3 数据一致性
+
+**挑战**：确保前后端数据格式一致和正确处理
+**解决方案**：
+- 统一的数据接口设计
+- 严格的类型检查
+- 规范的错误处理机制
+
+---
+
+此项目提供了一个完整的社交网络分析和可视化解决方案，从数据导入、处理、分析到可视化展示，实现了对复杂网络结构的直观理解和深入分析。通过模块化设计和扩展性架构，系统可以灵活适应不同类型的网络分析需求，为社交网络研究提供有力工具。

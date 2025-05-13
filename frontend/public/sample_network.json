@@ -1,0 +1,41 @@
+{
+  "nodes": [
+    {"id": "1", "name": "用户1", "group": 1},
+    {"id": "2", "name": "用户2", "group": 1},
+    {"id": "3", "name": "用户3", "group": 1},
+    {"id": "4", "name": "用户4", "group": 2},
+    {"id": "5", "name": "用户5", "group": 2},
+    {"id": "6", "name": "用户6", "group": 2},
+    {"id": "7", "name": "用户7", "group": 3},
+    {"id": "8", "name": "用户8", "group": 3},
+    {"id": "9", "name": "用户9", "group": 3},
+    {"id": "10", "name": "用户10", "group": 4},
+    {"id": "11", "name": "用户11", "group": 4},
+    {"id": "12", "name": "用户12", "group": 4},
+    {"id": "13", "name": "用户13", "group": 5},
+    {"id": "14", "name": "用户14", "group": 5},
+    {"id": "15", "name": "用户15", "group": 5}
+  ],
+  "edges": [
+    {"source": "1", "target": "2", "weight": 3},
+    {"source": "1", "target": "3", "weight": 2},
+    {"source": "2", "target": "3", "weight": 2},
+    {"source": "4", "target": "5", "weight": 2},
+    {"source": "4", "target": "6", "weight": 1},
+    {"source": "5", "target": "6", "weight": 3},
+    {"source": "7", "target": "8", "weight": 1},
+    {"source": "7", "target": "9", "weight": 2},
+    {"source": "8", "target": "9", "weight": 3},
+    {"source": "10", "target": "11", "weight": 2},
+    {"source": "10", "target": "12", "weight": 1},
+    {"source": "11", "target": "12", "weight": 3},
+    {"source": "13", "target": "14", "weight": 2},
+    {"source": "13", "target": "15", "weight": 1},
+    {"source": "14", "target": "15", "weight": 3},
+    {"source": "1", "target": "4", "weight": 1},
+    {"source": "4", "target": "7", "weight": 1},
+    {"source": "7", "target": "10", "weight": 1},
+    {"source": "10", "target": "13", "weight": 1},
+    {"source": "3", "target": "6", "weight": 1}
+  ]
+} 

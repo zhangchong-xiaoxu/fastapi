@@ -1,0 +1,167 @@
+{
+  "snapshots": [
+    {
+      "id": "1",
+      "name": "2023Q1 Network",
+      "date": "2023-03-31",
+      "nodeCount": 285,
+      "edgeCount": 752,
+      "density": 0.0186,
+      "avgDegree": 5.28
+    },
+    {
+      "id": "2",
+      "name": "2023Q2 Network",
+      "date": "2023-06-30",
+      "nodeCount": 327,
+      "edgeCount": 893,
+      "density": 0.0168,
+      "avgDegree": 5.46
+    },
+    {
+      "id": "3",
+      "name": "2023Q3 Network",
+      "date": "2023-09-30",
+      "nodeCount": 368,
+      "edgeCount": 1042,
+      "density": 0.0154,
+      "avgDegree": 5.66
+    },
+    {
+      "id": "4",
+      "name": "2023Q4 Network",
+      "date": "2023-12-31",
+      "nodeCount": 412,
+      "edgeCount": 1203,
+      "density": 0.0142,
+      "avgDegree": 5.84
+    },
+    {
+      "id": "5",
+      "name": "2024Q1 Network",
+      "date": "2024-03-31",
+      "nodeCount": 458,
+      "edgeCount": 1364,
+      "density": 0.0130,
+      "avgDegree": 5.96
+    }
+  ],
+  "comparisonData": {
+    "1_2": {
+      "nodeGrowth": 42,
+      "nodeGrowthPercent": "14.7",
+      "edgeGrowth": 141,
+      "edgeGrowthPercent": "18.8",
+      "densityChange": "-0.0018",
+      "avgDegreeChange": "0.18",
+      "newCommunities": 1,
+      "topGrowingCommunities": [
+        { "name": "Market", "growth": "23%" },
+        { "name": "Tech", "growth": "18%" },
+        { "name": "R&D", "growth": "12%" }
+      ],
+      "nodesByGroup": [
+        { "group": "Market", "before": 82, "after": 101 },
+        { "group": "Tech", "before": 75, "after": 89 },
+        { "group": "R&D", "before": 68, "after": 76 },
+        { "group": "Design", "before": 42, "after": 43 },
+        { "group": "Operations", "before": 18, "after": 18 }
+      ],
+      "structuralChanges": {
+        "commonNodes": 279,
+        "newNodes": 48,
+        "removedNodes": 6,
+        "commonEdges": 689,
+        "newEdges": 204,
+        "removedEdges": 63
+      }
+    },
+    "2_3": {
+      "nodeGrowth": 41,
+      "nodeGrowthPercent": "12.5",
+      "edgeGrowth": 149,
+      "edgeGrowthPercent": "16.7",
+      "densityChange": "-0.0014",
+      "avgDegreeChange": "0.20",
+      "newCommunities": 1,
+      "topGrowingCommunities": [
+        { "name": "R&D", "growth": "26%" },
+        { "name": "Market", "growth": "16%" },
+        { "name": "Design", "growth": "10%" }
+      ],
+      "nodesByGroup": [
+        { "group": "Market", "before": 101, "after": 117 },
+        { "group": "Tech", "before": 89, "after": 92 },
+        { "group": "R&D", "before": 76, "after": 96 },
+        { "group": "Design", "before": 43, "after": 47 },
+        { "group": "Operations", "before": 18, "after": 16 }
+      ],
+      "structuralChanges": {
+        "commonNodes": 318,
+        "newNodes": 50,
+        "removedNodes": 9,
+        "commonEdges": 832,
+        "newEdges": 210,
+        "removedEdges": 61
+      }
+    },
+    "3_4": {
+      "nodeGrowth": 44,
+      "nodeGrowthPercent": "12.0",
+      "edgeGrowth": 161,
+      "edgeGrowthPercent": "15.5",
+      "densityChange": "-0.0012",
+      "avgDegreeChange": "0.18",
+      "newCommunities": 0,
+      "topGrowingCommunities": [
+        { "name": "Tech", "growth": "28%" },
+        { "name": "Design", "growth": "17%" },
+        { "name": "Market", "growth": "9%" }
+      ],
+      "nodesByGroup": [
+        { "group": "Market", "before": 117, "after": 128 },
+        { "group": "Tech", "before": 92, "after": 118 },
+        { "group": "R&D", "before": 96, "after": 99 },
+        { "group": "Design", "before": 47, "after": 55 },
+        { "group": "Operations", "before": 16, "after": 12 }
+      ],
+      "structuralChanges": {
+        "commonNodes": 356,
+        "newNodes": 56,
+        "removedNodes": 12,
+        "commonEdges": 963,
+        "newEdges": 240,
+        "removedEdges": 79
+      }
+    },
+    "4_5": {
+      "nodeGrowth": 46,
+      "nodeGrowthPercent": "11.2",
+      "edgeGrowth": 161,
+      "edgeGrowthPercent": "13.4",
+      "densityChange": "-0.0012",
+      "avgDegreeChange": "0.12",
+      "newCommunities": 1,
+      "topGrowingCommunities": [
+        { "name": "Design", "growth": "31%" },
+        { "name": "R&D", "growth": "18%" },
+        { "name": "Operations", "growth": "17%" }
+      ],
+      "nodesByGroup": [
+        { "group": "Market", "before": 128, "after": 135 },
+        { "group": "Tech", "before": 118, "after": 124 },
+        { "group": "R&D", "before": 99, "after": 117 },
+        { "group": "Design", "before": 55, "after": 72 },
+        { "group": "Operations", "before": 12, "after": 14 }
+      ],
+      "structuralChanges": {
+        "commonNodes": 398,
+        "newNodes": 60,
+        "removedNodes": 14,
+        "commonEdges": 1103,
+        "newEdges": 261,
+        "removedEdges": 100
+      }
+    }
+  }
+} 
