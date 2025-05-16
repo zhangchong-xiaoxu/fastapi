@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 interface LoginProps {
   mode: 'login' | 'signup';
   setIsLoggedIn: (loggedIn: boolean) => void;
 }
-
 const Login: React.FC<LoginProps> = ({ mode, setIsLoggedIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,11 +39,10 @@ const Login: React.FC<LoginProps> = ({ mode, setIsLoggedIn }) => {
 
       // alert(`${mode === 'login' ? 'Login' : 'Sign-up'} successful!`);
       const data = await response.json();
-      
-      // Store the token in local storage
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('isAdmin', data.is_admin ? 'true' : 'false');
       setIsLoggedIn(true);
+      navigate('/'); // Redirect to the dashboard or home page
     } catch (err: any) {
       setError(err.message);
     }
