@@ -24,6 +24,17 @@ class User(Base):
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
 
+class Auth(Base):
+    """Model for lohin and sign up user info."""
+    __tablename__ = "auth"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True)
+    password = Column(String)  # Add password field
+    is_admin = Column(Boolean, default=False)  # Add admin flag
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
+
 class AnalysisHistory(Base):
     """Model for storing analysis history."""
     __tablename__ = "analysis_history"
@@ -86,6 +97,22 @@ def get_db():
 def init_db():
     """Initialize the database by creating all tables."""
     Base.metadata.create_all(bind=engine)
+
+def get_user_by_username(db, username: str):
+    """Fetch a user by username."""
+    return db.query(Auth).filter(Auth.username == username).first()
+
+def create_user(db, username: str, password: str, is_admin: bool = False):
+    """Create a new user."""
+    new_user = Auth(username=username, password=password, is_admin=is_admin)
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return new_user
+
+def get_all_users(db):
+    """Fetch all users except admin."""
+    return db.query(Auth).filter(Auth.is_admin == False).all()
 
 # Create tables when module is imported
 init_db() 
