@@ -11,11 +11,11 @@ import DataUpload from './pages/DataUpload';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
-import UserList from './pages/UserList';
 
 // Import components
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
+import UserList from 'pages/User';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('isLoggedIn') === 'true');
@@ -42,7 +42,7 @@ function App() {
                 <Route path="/comparison" element={<NetworkComparison />} />
                 <Route path="/upload" element={<DataUpload />} />
                 <Route path="/settings" element={<Settings />} />
-                {isAdmin && <Route path="/users" element={<UserList />} />}
+                {localStorage.getItem('isAdmin') === 'true' && <Route path="/users" element={<UserList />} />}
                 <Route path="*" element={<NotFound />} />
               </>
             )}

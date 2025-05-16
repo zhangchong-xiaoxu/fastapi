@@ -42,7 +42,7 @@ const UserList: React.FC = () => {
       }
 
       setUsers((prevUsers) => prevUsers.filter((user) => user.username !== username));
-      alert(`User "${username}" deleted successfully.`);
+      // alert(`User "${username}" deleted successfully.`);
     } catch (err: any) {
       setError(err.message);
     }

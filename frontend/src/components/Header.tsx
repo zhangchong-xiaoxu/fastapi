@@ -25,11 +25,11 @@ const Header: React.FC<HeaderProps> = ({ isAdmin, setIsLoggedIn }) => {
       <div className="header-actions">
         <Link to="/upload" className="btn">上传数据</Link>
         {localStorage.getItem('isAdmin') === 'true' && (
-          <button className="btn" onClick={() => navigate('/users')}>
+          <button onClick={() => navigate('/users')}>
             用户列表
           </button>
         )}
-        <button className="btn logout-btn" onClick={handleLogout}>
+        <button onClick={handleLogout}>
           登出
         </button>
       </div>

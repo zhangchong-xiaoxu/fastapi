@@ -36,7 +36,12 @@ const Login: React.FC<LoginProps> = ({ mode, setIsLoggedIn }) => {
         throw new Error(errorData.detail || 'An error occurred');
       }
 
-      alert(`${mode === 'login' ? 'Login' : 'Sign-up'} successful!`);
+      // alert(`${mode === 'login' ? 'Login' : 'Sign-up'} successful!`);
+      const data = await response.json();
+      
+      // Store the token in local storage
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('isAdmin', data.is_admin ? 'true' : 'false');
       setIsLoggedIn(true);
     } catch (err: any) {
       setError(err.message);
