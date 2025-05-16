@@ -50,3 +50,14 @@ async def get_users(db: Session = Depends(get_db)):
     """获取用户列表（不包括管理员）"""
     users = get_all_users(db)
     return [UserResponse(username=user.username, is_admin=user.is_admin) for user in users]
+
+@router.delete("/users/{username}", response_model=UserResponse)
+async def delete_user(username: str, db: Session = Depends(get_db)):
+    """删除用户"""
+    user = get_user_by_username(db, username)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    db.delete(user)
+    db.commit()
+    return UserResponse(username=user.username, is_admin=user.is_admin)
