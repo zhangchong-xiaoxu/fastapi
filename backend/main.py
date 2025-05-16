@@ -30,12 +30,14 @@ from api.network import router as network_router
 from api.analysis import router as analysis_router
 from api.user import router as user_router
 from api.activities import router as activities_router
+from api.auth import router as auth_router
 
 # Include API routers
 app.include_router(network_router, prefix="/api/network", tags=["Network"])
 app.include_router(analysis_router, prefix="/api/analysis", tags=["Analysis"])
 app.include_router(user_router, prefix="/api/user", tags=["User"])
 app.include_router(activities_router, prefix="/api/activities", tags=["Activities"])
+app.include_router(auth_router, prefix="/api/auth", tags=["Auth"])
 
 # Ensure the data directories exist
 os.makedirs("../data/input", exist_ok=True)
