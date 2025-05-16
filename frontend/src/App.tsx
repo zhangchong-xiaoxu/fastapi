@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
 // Import pages
@@ -10,26 +10,42 @@ import NetworkComparison from './pages/NetworkComparison';
 import DataUpload from './pages/DataUpload';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
+import Login from './pages/Login';
+import UserList from './pages/UserList';
 
 // Import components
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('isLoggedIn') === 'true');
+  const [isAdmin, setIsAdmin] = useState(() => localStorage.getItem('isAdmin') === 'true');
+
   return (
     <div className="app">
-      <Header />
+      {isLoggedIn && <Header isAdmin={isAdmin} setIsLoggedIn={setIsLoggedIn} />}
       <div className="app-container">
-        <Sidebar />
+        {isLoggedIn && <Sidebar />}
         <main className="content">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/network" element={<NetworkView />} />
-            <Route path="/analysis" element={<Analysis />} />
-            <Route path="/comparison" element={<NetworkComparison />} />
-            <Route path="/upload" element={<DataUpload />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="*" element={<NotFound />} />
+            {!isLoggedIn ? (
+              <>
+                <Route path="/login" element={<Login mode="login" setIsLoggedIn={setIsLoggedIn} />} />
+                <Route path="/signup" element={<Login mode="signup" setIsLoggedIn={setIsLoggedIn} />} />
+                <Route path="*" element={<Navigate to="/login" />} />
+              </>
+            ) : (
+              <>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/network" element={<NetworkView />} />
+                <Route path="/analysis" element={<Analysis />} />
+                <Route path="/comparison" element={<NetworkComparison />} />
+                <Route path="/upload" element={<DataUpload />} />
+                <Route path="/settings" element={<Settings />} />
+                {isAdmin && <Route path="/users" element={<UserList />} />}
+                <Route path="*" element={<NotFound />} />
+              </>
+            )}
           </Routes>
         </main>
       </div>
@@ -37,4 +53,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
